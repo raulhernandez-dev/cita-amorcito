@@ -2,7 +2,7 @@
    EDITA AQUÍ ✏️  — todo lo personalizable está en este objeto
    ============================================================ */
 const CONFIG = {
-  nombre: "Bonita",                   // su nombre: aparece en "Para ___" y "Hola, ___"
+  nombre: "Karen",                     // su nombre: aparece en "Para ___" y "Hola, ___"
   carta: [
     "Llevo un tiempo queriendo decirte algo.",
     "Me encanta platicar contigo, tu risa y cómo se pasa el tiempo volando cuando estamos juntos.",
@@ -10,7 +10,7 @@ const CONFIG = {
   ],
   pregunta: "¿Te gustaría tener una cita conmigo?",
 
-  fecha: "2026-11-07T19:00",          // AAAA-MM-DDTHH:MM (hora local)
+  fecha: "2026-11-07T14:00",          // AAAA-MM-DDTHH:MM (hora local)
   duracionHoras: 3,
   lugar: "Es sorpresa ✨",
   mapa: "",                           // link de Google Maps (déjalo vacío para ocultar el botón)
@@ -24,6 +24,21 @@ const CONFIG = {
 /* ============================================================ */
 
 const HEART = '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+const SPARKLE = '<svg viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z"/></svg>';
+// ramita de flores en trazo fino (se "dibuja" sola al aparecer)
+const SPRIG = `<svg viewBox="0 0 120 120" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path pathLength="1" d="M112 8C50 6 8 40 8 112"/>
+  <path pathLength="1" d="M77 11Q74 26 88 26Q88 14 77 11Z"/>
+  <path pathLength="1" d="M49 23Q42 8 56 4Q58 16 49 23Z"/>
+  <path pathLength="1" d="M27 44Q16 30 4 34Q12 46 27 44Z"/>
+  <path pathLength="1" d="M13 73Q28 74 30 88Q16 88 13 73Z"/>
+  <path pathLength="1" d="M62 16Q66 30 60 40"/>
+  <path pathLength="1" d="M19 57Q32 60 38 70"/>
+  <path pathLength="1" d="M42 38m-7 0a7 7 0 1 0 14 0a7 7 0 1 0-14 0"/>
+  <path pathLength="1" d="M39 38q3-5 6 0q-3 5-6 0"/>
+  <circle class="berry" cx="60" cy="43" r="2"/><circle class="berry" cx="56" cy="40" r="1.6"/><circle class="berry" cx="64" cy="41" r="1.4"/>
+  <circle class="berry" cx="40" cy="72" r="2"/><circle class="berry" cx="41" cy="67" r="1.5"/>
+</svg>`;
 const $ = (sel) => document.querySelector(sel);
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const wait = (ms) => new Promise((r) => setTimeout(r, reduceMotion ? Math.min(ms, 150) : ms));
@@ -50,6 +65,14 @@ function fill() {
   });
   $("#question").textContent = CONFIG.pregunta;
 
+  document.querySelectorAll(".card").forEach((card) => {
+    const deco = document.createElement("div");
+    deco.className = "sprigs";
+    deco.setAttribute("aria-hidden", "true");
+    deco.innerHTML = `<span class="sprig sprig--tl">${SPRIG}</span><span class="sprig sprig--br">${SPRIG}</span>`;
+    card.appendChild(deco);
+  });
+
   if (!CONFIG.vestimenta) $("#detail-vestimenta").remove();
   if (CONFIG.mapa) $("#btn-map").href = CONFIG.mapa;
   else $("#btn-map").remove();
@@ -71,6 +94,19 @@ function petals() {
     el.style.setProperty("--delay", `${-Math.random() * 26}s`);
     el.style.setProperty("--o", (0.25 + Math.random() * 0.35).toFixed(2));
     el.style.setProperty("--r", `${(Math.random() - 0.5) * 120}deg`);
+    box.appendChild(el);
+  }
+  // destellos que titilan
+  const sparkles = window.innerWidth < 600 ? 9 : 16;
+  for (let i = 0; i < sparkles; i++) {
+    const el = document.createElement("span");
+    el.className = "sparkle";
+    el.innerHTML = SPARKLE;
+    el.style.setProperty("--x", `${4 + Math.random() * 92}%`);
+    el.style.setProperty("--y", `${4 + Math.random() * 92}%`);
+    el.style.setProperty("--s", `${6 + Math.random() * 9}px`);
+    el.style.setProperty("--d", `${2.5 + Math.random() * 3}s`);
+    el.style.setProperty("--delay", `${-Math.random() * 5}s`);
     box.appendChild(el);
   }
 }
