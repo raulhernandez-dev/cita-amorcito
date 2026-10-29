@@ -13,7 +13,7 @@ const CONFIG = {
   fecha: "2026-10-29T14:00",          // AAAA-MM-DDTHH:MM (hora local)
   lugar: "Es sorpresa",
   mapa: "",                           // link de Google Maps (déjalo vacío para ocultar el botón)
-  nota: "Paso por ti. Tú solo trae tu sonrisa.",
+  nota: "Paso por ti.",
   firma: "con cariño, Raúl",
 };
 /* ============================================================ */
