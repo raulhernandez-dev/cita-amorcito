@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fbf4f0">
+  <title>Tengo algo para ti</title>
+  <meta name="description" content="Una carta pequeñita, solo para ti.">
+  <meta property="og:title" content="Tengo algo para ti 💌">
+  <meta property="og:description" content="Una carta pequeñita, solo para ti. Ábrela.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23b4434f' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="petals" aria-hidden="true"></div>
+
+  <!-- 1. Sobre -->
+  <section class="screen screen--envelope is-active" id="screen-envelope">
+    <p class="kicker fade-in">Para <span data-field="nombre"></span></p>
+
+    <button class="envelope" id="envelope" aria-label="Abrir la carta">
+      <span class="env-back"></span>
+      <span class="env-letter">
+        <span class="env-letter-line"></span>
+        <span class="env-letter-line"></span>
+        <span class="env-letter-line short"></span>
+      </span>
+      <span class="env-front"></span>
+      <span class="env-flap"></span>
+      <span class="env-seal">
+        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </span>
+    </button>
+
+    <p class="hint fade-in">toca el sobre para abrirlo</p>
+  </section>
+
+  <!-- 2. Carta -->
+  <section class="screen screen--letter" id="screen-letter" aria-live="polite">
+    <article class="card">
+      <p class="card-greet reveal">Hola, <span data-field="nombre"></span></p>
+      <div class="card-body" id="letter-body"></div>
+      <h1 class="question reveal" id="question"></h1>
+      <div class="actions reveal" id="actions">
+        <button class="btn btn--yes" id="btn-yes">Sí</button>
+        <button class="btn btn--no" id="btn-no">No</button>
+      </div>
+    </article>
+  </section>
+
+  <!-- 3. ¡Es una cita! -->
+  <section class="screen screen--date" id="screen-date">
+    <article class="card card--date">
+      <p class="kicker">sabía que dirías que sí</p>
+      <h2 class="script-title">¡Es una cita!</h2>
+
+      <dl class="details">
+        <div class="detail">
+          <dt>Cuándo</dt>
+          <dd data-field="fecha"></dd>
+        </div>
+        <div class="detail">
+          <dt>Hora</dt>
+          <dd data-field="hora"></dd>
+        </div>
+        <div class="detail">
+          <dt>Dónde</dt>
+          <dd data-field="lugar"></dd>
+        </div>
+        <div class="detail" id="detail-vestimenta">
+          <dt>Trae</dt>
+          <dd data-field="vestimenta"></dd>
+        </div>
+      </dl>
+
+      <div class="countdown" id="countdown" aria-label="Cuenta regresiva">
+        <div><span id="cd-d">0</span><small>días</small></div>
+        <div><span id="cd-h">0</span><small>horas</small></div>
+        <div><span id="cd-m">0</span><small>min</small></div>
+        <div><span id="cd-s">0</span><small>seg</small></div>
+      </div>
+
+      <div class="date-actions">
+        <button class="btn btn--yes btn--small" id="btn-calendar">Guardar en mi calendario</button>
+        <a class="btn btn--ghost btn--small" id="btn-map" target="_blank" rel="noopener">Cómo llegar</a>
+      </div>
+
+      <p class="note" data-field="nota"></p>
+      <p class="signature" data-field="firma"></p>
+    </article>
+  </section>
+
+  <div class="burst" id="burst" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
