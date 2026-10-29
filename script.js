@@ -15,9 +15,6 @@ const CONFIG = {
   mapa: "",                           // link de Google Maps (déjalo vacío para ocultar el botón)
   nota: "Paso por ti. Tú solo trae tu sonrisa.",
   firma: "con cariño, Raúl",
-
-  // Lo que dice el botón "No" cada vez que intenta tocarlo
-  respuestasNo: ["¿Segura?", "Piénsalo bien", "¿Y si sí?", "Ándale…", "Es tu cumpleaños…", "Bueno, sí"],
 };
 /* ============================================================ */
 
@@ -166,65 +163,15 @@ async function revealLetter() {
 
 /* ---------- 2. Sí / No ---------- */
 
-const btnYes = $("#btn-yes");
-const btnNo = $("#btn-no");
-let tries = 0;
-let lastDodge = 0;
-const gaveUp = () => tries >= CONFIG.respuestasNo.length;
+$("#btn-yes").addEventListener("click", sayYes);
 
-function dodge(e) {
-  if (gaveUp()) return; // ya se rindió: deja que lo toque
-  e.preventDefault();
-  if (Date.now() - lastDodge < 450) return; // un toque = un salto
-  lastDodge = Date.now();
-
-  tries++;
-  btnNo.textContent = CONFIG.respuestasNo[tries - 1];
-  btnYes.style.setProperty("--grow", (1 + tries * 0.12).toFixed(2));
-
-  const r = btnNo.getBoundingClientRect();
-  if (!btnNo.classList.contains("is-running")) {
-    // hueco del mismo tamaño para que el "Sí" no se mueva bajo el dedo
-    const hole = document.createElement("span");
-    hole.style.cssText = `width:${r.width}px;height:${r.height}px;flex:none`;
-    btnNo.before(hole);
-    btnNo.style.left = `${r.left}px`;
-    btnNo.style.top = `${r.top}px`;
-    btnNo.classList.add("is-running");
-  }
-
-  const pad = 16;
-  const maxX = window.innerWidth - r.width - pad;
-  const maxY = window.innerHeight - r.height - pad;
-  let x, y, tries2 = 0;
-  // busca un lugar lejos de donde estaba
-  do {
-    x = pad + Math.random() * (maxX - pad);
-    y = pad + Math.random() * (maxY - pad);
-    tries2++;
-  } while (Math.hypot(x - r.left, y - r.top) < 140 && tries2 < 20);
-
-  requestAnimationFrame(() => {
-    btnNo.style.left = `${x}px`;
-    btnNo.style.top = `${y}px`;
-  });
-  btnNo.style.animation = "wiggle .4s";
-  setTimeout(() => (btnNo.style.animation = ""), 400);
-}
-
-btnNo.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") dodge(e); });
-btnNo.addEventListener("pointerdown", dodge);
-// en celular, cancelar el touchstart evita el "click fantasma" que caía en el botón Sí
-btnNo.addEventListener("touchstart", (e) => { if (!gaveUp()) e.preventDefault(); }, { passive: false });
-btnNo.addEventListener("click", (e) => {
-  if (gaveUp()) sayYes();
-  else dodge(e);
+$("#btn-no").addEventListener("click", async () => {
+  navigator.vibrate?.([60, 80, 60]);
+  await go("#screen-letter", "#screen-no");
 });
 
-btnYes.addEventListener("click", () => {
-  if (Date.now() - lastDodge < 600) return; // el toque era para el "No"
-  sayYes();
-});
+// "era broma": regresa a la carta para que lo piense otra vez
+$("#btn-back").addEventListener("click", () => go("#screen-no", "#screen-letter"));
 
 let saidYes = false;
 async function sayYes() {
@@ -232,8 +179,6 @@ async function sayYes() {
   saidYes = true;
   navigator.vibrate?.([20, 40, 20]);
   burst();
-  btnNo.classList.remove("is-running");
-  btnNo.style.visibility = "hidden";
   await wait(600);
   await go("#screen-letter", "#screen-date");
   setTimeout(burst, 900);

@@ -360,12 +360,6 @@ button { font: inherit; color: inherit; }
   border-color: var(--line);
 }
 
-.btn--no.is-running {
-  position: fixed;
-  z-index: 20;
-  background: var(--paper);
-  transition: left .45s var(--ease), top .45s var(--ease), transform .35s var(--ease);
-}
 
 .btn--ghost {
   background: transparent;
@@ -567,6 +561,57 @@ button { font: inherit; color: inherit; }
   50%      { opacity: 1; }
 }
 
+/* ---------- Corazón roto ---------- */
+
+.broken {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  filter: drop-shadow(0 12px 18px rgba(120, 40, 50, .22));
+}
+.broken-half {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: #b5525c;
+}
+/* las dos mitades se cortan con la misma línea en zigzag */
+.broken-half--l { clip-path: polygon(0 0, 52% 0, 45% 26%, 56% 44%, 44% 64%, 53% 84%, 50% 100%, 0 100%); }
+.broken-half--r { clip-path: polygon(52% 0, 100% 0, 100% 100%, 50% 100%, 53% 84%, 44% 64%, 56% 44%, 45% 26%); }
+
+.screen--no.is-active .broken { animation: heartbeat .9s .2s ease-in-out; }
+.screen--no.is-active .broken-half--l { animation: splitL 1.4s 1.1s var(--ease) forwards, sadSway 4s 2.5s ease-in-out infinite; }
+.screen--no.is-active .broken-half--r { animation: splitR 1.4s 1.1s var(--ease) forwards, sadSway 4s 2.5s ease-in-out infinite reverse; }
+
+.sad-title {
+  margin: 0;
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: clamp(44px, 13vw, 56px);
+  line-height: 1.1;
+  color: var(--forest-deep);
+  text-align: center;
+}
+.screen--no.is-active .sad-title { animation: fadeUp 1.2s 1.9s var(--ease) both; }
+.screen--no.is-active .sad-back { animation: fadeUp 1.2s 2.8s var(--ease) both; }
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  30%      { transform: scale(1.12); }
+  60%      { transform: scale(.96); }
+}
+@keyframes splitL {
+  to { transform: translate(-14px, 10px) rotate(-14deg); }
+}
+@keyframes splitR {
+  to { transform: translate(14px, 14px) rotate(12deg); }
+}
+@keyframes sadSway {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 5px; }
+}
+
 /* ---------- Animaciones ---------- */
 
 @keyframes fadeUp {
@@ -616,11 +661,6 @@ button { font: inherit; color: inherit; }
   50%      { transform: scale(1) rotate(45deg); opacity: .85; }
 }
 
-@keyframes wiggle {
-  0%, 100% { transform: rotate(0); }
-  25% { transform: rotate(-6deg); }
-  75% { transform: rotate(6deg); }
-}
 
 /* ---------- Pantallas pequeñas / grandes ---------- */
 
