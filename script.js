@@ -13,7 +13,6 @@ const CONFIG = {
   fecha: "2026-10-29T14:00",          // AAAA-MM-DDTHH:MM (hora local)
   lugar: "Es sorpresa",
   mapa: "",                           // link de Google Maps (déjalo vacío para ocultar el botón)
-  vestimenta: "Tu sonrisa (y algo cómodo)",
   nota: "Paso por ti. Tú solo trae tu sonrisa.",
   firma: "con cariño, Raúl",
 
@@ -78,7 +77,6 @@ function fill() {
     .map((c) => `<span class="sprig vine vine--${c}">${SPRIG}</span>`)
     .join("");
 
-  if (!CONFIG.vestimenta) $("#detail-vestimenta").remove();
   if (CONFIG.mapa) $("#btn-map").href = CONFIG.mapa;
   else $("#date-actions").remove();
 }
@@ -186,6 +184,10 @@ function dodge(e) {
 
   const r = btnNo.getBoundingClientRect();
   if (!btnNo.classList.contains("is-running")) {
+    // hueco del mismo tamaño para que el "Sí" no se mueva bajo el dedo
+    const hole = document.createElement("span");
+    hole.style.cssText = `width:${r.width}px;height:${r.height}px;flex:none`;
+    btnNo.before(hole);
     btnNo.style.left = `${r.left}px`;
     btnNo.style.top = `${r.top}px`;
     btnNo.classList.add("is-running");
@@ -212,12 +214,17 @@ function dodge(e) {
 
 btnNo.addEventListener("pointerenter", (e) => { if (e.pointerType === "mouse") dodge(e); });
 btnNo.addEventListener("pointerdown", dodge);
+// en celular, cancelar el touchstart evita el "click fantasma" que caía en el botón Sí
+btnNo.addEventListener("touchstart", (e) => { if (!gaveUp()) e.preventDefault(); }, { passive: false });
 btnNo.addEventListener("click", (e) => {
   if (gaveUp()) sayYes();
   else dodge(e);
 });
 
-btnYes.addEventListener("click", sayYes);
+btnYes.addEventListener("click", () => {
+  if (Date.now() - lastDodge < 600) return; // el toque era para el "No"
+  sayYes();
+});
 
 let saidYes = false;
 async function sayYes() {
