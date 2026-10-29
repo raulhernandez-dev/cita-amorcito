@@ -1,18 +1,18 @@
 :root {
   color-scheme: light;
-  --bg: #fbf4f0;
-  --bg-2: #f6e4e1;
-  --paper: #fffdfb;
-  --ink: #4a2a2e;
-  --ink-soft: #8a6a6c;
-  --rose: #e9a9ad;
-  --wine: #b4434f;
-  --wine-deep: #8c2f39;
-  --env: #f3cfcb;
-  --env-dark: #e2aeab;
-  --env-flap: #edbfbb;
-  --line: rgba(140, 47, 57, .14);
-  --gold: #d6a77a;
+  --bg: #eef2e6;
+  --bg-2: #dfe7d3;
+  --paper: #fdfcf6;
+  --ink: #2f3d2c;
+  --ink-soft: #6d7d66;
+  --sage: #a9bf98;
+  --forest: #4f6b45;
+  --forest-deep: #34492f;
+  --env: #d3dfc5;
+  --env-dark: #b7c9a5;
+  --env-flap: #c6d6b5;
+  --line: rgba(52, 73, 47, .15);
+  --gold: #c9a45c;
 
   --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --script: "Pinyon Script", "Brush Script MT", cursive;
@@ -28,7 +28,7 @@ body {
   min-height: 100dvh;
   overflow-x: hidden;
   background:
-    radial-gradient(120% 80% at 50% 0%, #fff9f6 0%, transparent 60%),
+    radial-gradient(120% 80% at 50% 0%, #f8faf2 0%, transparent 60%),
     radial-gradient(90% 60% at 50% 100%, var(--bg-2) 0%, transparent 70%),
     var(--bg);
   color: var(--ink);
@@ -104,12 +104,12 @@ button { font: inherit; color: inherit; }
   cursor: pointer;
   perspective: 900px;
   animation: float 4.5s ease-in-out infinite, fadeUp 1.2s .15s var(--ease) both;
-  filter: drop-shadow(0 18px 28px rgba(140, 47, 57, .16));
+  filter: drop-shadow(0 18px 28px rgba(52, 73, 47, .16));
   transition: transform .4s var(--ease);
 }
 
 .envelope:active { transform: scale(.98); }
-.envelope:focus-visible { outline: 2px solid var(--wine); outline-offset: 10px; border-radius: 8px; }
+.envelope:focus-visible { outline: 2px solid var(--forest); outline-offset: 10px; border-radius: 8px; }
 
 .envelope > span { position: absolute; display: block; }
 
@@ -141,7 +141,7 @@ button { font: inherit; color: inherit; }
 
 .env-front {
   inset: 0;
-  background: linear-gradient(180deg, var(--env) 0%, #f0c5c1 100%);
+  background: linear-gradient(180deg, var(--env) 0%, #c8d7b8 100%);
   border-radius: 8px;
   clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%);
   z-index: 3;
@@ -163,8 +163,8 @@ button { font: inherit; color: inherit; }
   width: 46px; height: 46px;
   margin: -23px 0 0 -23px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #cf5d69, var(--wine-deep));
-  box-shadow: 0 3px 8px rgba(90, 20, 30, .35), inset 0 0 0 3px rgba(255,255,255,.08);
+  background: radial-gradient(circle at 35% 30%, #6f8f5f, var(--forest-deep));
+  box-shadow: 0 3px 8px rgba(30, 45, 28, .35), inset 0 0 0 3px rgba(255,255,255,.08);
   display: grid !important;
   place-items: center;
   z-index: 5;
@@ -172,7 +172,7 @@ button { font: inherit; color: inherit; }
   animation: pulse 2.6s ease-in-out infinite;
 }
 
-.env-seal svg { width: 20px; height: 20px; fill: #fbe3e3; }
+.env-seal svg { width: 20px; height: 20px; fill: #f0dca0; }
 
 .env-name {
   left: 0; right: 0; bottom: 7%;
@@ -180,7 +180,7 @@ button { font: inherit; color: inherit; }
   flex-direction: column;
   align-items: center;
   z-index: 4;
-  color: var(--wine-deep);
+  color: var(--forest-deep);
   pointer-events: none;
 }
 .env-name small {
@@ -212,8 +212,8 @@ button { font: inherit; color: inherit; }
   border-radius: 6px;
   box-shadow:
     0 1px 0 rgba(255,255,255,.8) inset,
-    0 30px 60px -20px rgba(140, 47, 57, .22),
-    0 8px 18px -8px rgba(140, 47, 57, .12);
+    0 30px 60px -20px rgba(52, 73, 47, .22),
+    0 8px 18px -8px rgba(52, 73, 47, .12);
   text-align: center;
 }
 
@@ -231,7 +231,7 @@ button { font: inherit; color: inherit; }
   font-family: var(--script);
   font-size: 40px;
   line-height: 1.1;
-  color: var(--wine);
+  color: var(--forest);
 }
 
 .card-body p {
@@ -246,7 +246,7 @@ button { font: inherit; color: inherit; }
   font-size: clamp(26px, 7.4vw, 32px);
   line-height: 1.2;
   font-style: italic;
-  color: var(--wine-deep);
+  color: var(--forest-deep);
 }
 
 .reveal {
@@ -270,12 +270,12 @@ button { font: inherit; color: inherit; }
 .divider span {
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--rose));
+  background: linear-gradient(90deg, transparent, var(--sage));
   transform: scaleX(0);
   transition: transform 1.2s .2s var(--ease);
 }
-.divider span:last-child { background: linear-gradient(90deg, var(--rose), transparent); }
-.divider svg { width: 12px; height: 12px; fill: var(--wine); flex: none; }
+.divider span:last-child { background: linear-gradient(90deg, var(--sage), transparent); }
+.divider svg { width: 14px; height: 14px; fill: var(--gold); flex: none; }
 .is-shown .divider span,
 .screen--date.is-active .divider span { transform: none; }
 .divider span:first-child { transform-origin: right; }
@@ -295,12 +295,12 @@ button { font: inherit; color: inherit; }
 .sprig--br { right: -4px; bottom: -4px; transform: rotate(180deg); }
 .sprig svg { display: block; width: 100%; height: auto; overflow: visible; }
 .sprig path {
-  stroke: var(--wine);
+  stroke: var(--forest);
   stroke-width: 1.4;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
 }
-.sprig path:nth-child(n+2) { stroke: #c97a82; }
+.sprig path:nth-child(n+2) { stroke: #7f9a70; }
 .sprig .berry { fill: var(--gold); opacity: 0; transition: opacity .8s 2.2s; }
 .is-active .sprig path { animation: draw 2.4s .5s var(--ease) forwards; }
 .is-active .sprig path:nth-child(n+2) { animation-delay: 1.2s; }
@@ -346,12 +346,12 @@ button { font: inherit; color: inherit; }
 }
 
 .btn--yes {
-  background: var(--wine);
-  color: #fff6f4;
-  box-shadow: 0 10px 22px -10px rgba(140, 47, 57, .7);
+  background: var(--forest);
+  color: #fbfaf0;
+  box-shadow: 0 10px 22px -10px rgba(52, 73, 47, .7);
   transform: scale(var(--grow, 1));
 }
-.btn--yes:hover { background: var(--wine-deep); }
+.btn--yes:hover { background: var(--forest-deep); }
 .btn--yes:active { transform: scale(calc(var(--grow, 1) * .96)); }
 
 .btn--no {
@@ -369,13 +369,13 @@ button { font: inherit; color: inherit; }
 
 .btn--ghost {
   background: transparent;
-  color: var(--wine);
-  border-color: rgba(180, 67, 79, .35);
+  color: var(--forest);
+  border-color: rgba(79, 107, 69, .35);
 }
 
 .btn--small { min-width: 0; min-height: 44px; font-size: 17px; padding: 0 20px; }
 
-.btn:focus-visible { outline: 2px solid var(--wine); outline-offset: 3px; }
+.btn:focus-visible { outline: 2px solid var(--forest); outline-offset: 3px; }
 
 /* ---------- Detalles de la cita ---------- */
 
@@ -387,7 +387,7 @@ button { font: inherit; color: inherit; }
   font-weight: 400;
   font-size: clamp(50px, 15vw, 62px);
   line-height: 1.1;
-  color: var(--wine);
+  color: var(--forest);
 }
 
 .details {
@@ -428,7 +428,7 @@ button { font: inherit; color: inherit; }
   font-size: 30px;
   font-weight: 500;
   line-height: 1;
-  color: var(--wine-deep);
+  color: var(--forest-deep);
   font-variant-numeric: lining-nums tabular-nums;
 }
 .countdown small {
@@ -457,7 +457,7 @@ button { font: inherit; color: inherit; }
   margin: 0;
   font-family: var(--script);
   font-size: 30px;
-  color: var(--wine);
+  color: var(--forest);
 }
 
 .screen--date .card > * { animation: fadeUp 1s var(--ease) both; }
@@ -494,7 +494,7 @@ button { font: inherit; color: inherit; }
 .petal svg {
   width: 100%;
   height: 100%;
-  fill: var(--rose);
+  fill: var(--sage);
   animation: sway calc(var(--d) / 3) ease-in-out infinite alternate;
 }
 
@@ -519,6 +519,54 @@ button { font: inherit; color: inherit; }
 }
 .burst svg { width: 100%; height: 100%; fill: var(--c); }
 
+
+/* ---------- Bosque encantado ---------- */
+
+.petal svg .vein { fill: none; stroke: rgba(255,255,255,.55); stroke-width: 1; }
+.burst svg .vein { fill: none; stroke: rgba(255,255,255,.5); stroke-width: 1; }
+
+.firefly {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: #f6e7a8;
+  box-shadow: 0 0 6px 2px rgba(240, 214, 130, .75), 0 0 16px 6px rgba(240, 214, 130, .3);
+  animation:
+    drift var(--d) ease-in-out var(--delay) infinite alternate,
+    glow var(--g) ease-in-out var(--delay) infinite;
+}
+
+.vines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+.vine {
+  width: clamp(110px, 34vw, 190px);
+  opacity: .55;
+}
+.vine--tl { left: -6px; top: -6px; }
+.vine--tr { right: -6px; top: -6px; transform: scaleX(-1); }
+.vine--bl { left: -6px; bottom: -6px; transform: scaleY(-1); }
+.vine--br { right: -6px; bottom: -6px; transform: rotate(180deg); }
+.vine path { animation: draw 3s .3s var(--ease) forwards; }
+.vine path:nth-child(n+2) { animation-delay: 1.2s; }
+.vine .berry { opacity: 1; }
+
+@keyframes drift {
+  from { translate: 0 0; }
+  to   { translate: var(--dx) var(--dy); }
+}
+
+@keyframes glow {
+  0%, 100% { opacity: .15; }
+  50%      { opacity: 1; }
+}
+
 /* ---------- Animaciones ---------- */
 
 @keyframes fadeUp {
@@ -532,8 +580,8 @@ button { font: inherit; color: inherit; }
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 3px 8px rgba(90,20,30,.35), 0 0 0 0 rgba(180,67,79,.35); }
-  50%      { box-shadow: 0 3px 8px rgba(90,20,30,.35), 0 0 0 10px rgba(180,67,79,0); }
+  0%, 100% { box-shadow: 0 3px 8px rgba(30,45,28,.35), 0 0 0 0 rgba(79,107,69,.35); }
+  50%      { box-shadow: 0 3px 8px rgba(30,45,28,.35), 0 0 0 10px rgba(79,107,69,0); }
 }
 
 @keyframes breathe {
@@ -596,4 +644,5 @@ button { font: inherit; color: inherit; }
   }
   .petals { display: none; }
   .sprig path { stroke-dashoffset: 0; }
+  .firefly { opacity: .7; }
 }

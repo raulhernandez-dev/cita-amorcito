@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#fbf4f0">
+  <meta name="theme-color" content="#eef2e6">
   <title>Tengo algo para ti</title>
   <meta name="description" content="Una carta pequeñita, solo para ti.">
-  <meta property="og:title" content="Tengo algo para ti 💌">
+  <meta property="og:title" content="Tengo algo para ti">
   <meta property="og:description" content="Una carta pequeñita, solo para ti. Ábrela.">
   <meta property="og:type" content="website">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23b4434f' d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%234f6b45' d='M20 4C10 4 4 10 4 20c10 0 16-6 16-16z'/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
@@ -17,10 +17,11 @@
 </head>
 <body>
   <div class="petals" aria-hidden="true"></div>
+  <div class="vines" aria-hidden="true"></div>
 
   <!-- 1. Sobre -->
   <section class="screen screen--envelope is-active" id="screen-envelope">
-    <p class="kicker fade-in">una carta para ti</p>
+    <p class="kicker fade-in">una carta para la cumpleañera</p>
 
     <button class="envelope" id="envelope" aria-label="Abrir la carta">
       <span class="env-back"></span>
@@ -44,7 +45,7 @@
   <section class="screen screen--letter" id="screen-letter" aria-live="polite">
     <article class="card">
       <p class="card-greet reveal">Hola, <span data-field="nombre"></span></p>
-      <div class="reveal"><div class="divider" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span></span></div></div>
+      <div class="reveal"><div class="divider" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z"/></svg><span></span></div></div>
       <div class="card-body" id="letter-body"></div>
       <h1 class="question reveal" id="question"></h1>
       <div class="actions reveal" id="actions">
@@ -57,9 +58,9 @@
   <!-- 3. ¡Es una cita! -->
   <section class="screen screen--date" id="screen-date">
     <article class="card card--date">
-      <p class="kicker">sabía que dirías que sí</p>
+      <p class="kicker">feliz cumpleaños</p>
       <h2 class="script-title">¡Es una cita!</h2>
-      <div class="divider" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span></span></div>
+      <div class="divider" aria-hidden="true"><span></span><svg viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z"/></svg><span></span></div>
 
       <dl class="details">
         <div class="detail">
@@ -87,8 +88,7 @@
         <div><span id="cd-s">0</span><small>seg</small></div>
       </div>
 
-      <div class="date-actions">
-        <button class="btn btn--yes btn--small" id="btn-calendar">Guardar en mi calendario</button>
+      <div class="date-actions" id="date-actions">
         <a class="btn btn--ghost btn--small" id="btn-map" target="_blank" rel="noopener">Cómo llegar</a>
       </div>
 

@@ -1,29 +1,29 @@
 /* ============================================================
-   EDITA AQUÍ ✏️  — todo lo personalizable está en este objeto
+   EDITA AQUÍ  — todo lo personalizable está en este objeto
    ============================================================ */
 const CONFIG = {
-  nombre: "Karen",                     // su nombre: aparece en "Para ___" y "Hola, ___"
+  nombre: "Karen",                    // su nombre: aparece en el sobre y en "Hola, ___"
   carta: [
-    "Llevo un tiempo queriendo decirte algo.",
+    "Tu cumpleaños se merece algo especial, igual que tú.",
     "Me encanta platicar contigo, tu risa y cómo se pasa el tiempo volando cuando estamos juntos.",
     "Así que junté valor y te hice esto…",
   ],
-  pregunta: "¿Te gustaría tener una cita conmigo?",
+  pregunta: "¿Me dejas celebrar tu cumpleaños contigo?",
 
-  fecha: "2026-11-07T14:00",          // AAAA-MM-DDTHH:MM (hora local)
-  duracionHoras: 3,
-  lugar: "Es sorpresa ✨",
+  fecha: "2026-10-29T14:00",          // AAAA-MM-DDTHH:MM (hora local)
+  lugar: "Es sorpresa",
   mapa: "",                           // link de Google Maps (déjalo vacío para ocultar el botón)
   vestimenta: "Tu sonrisa (y algo cómodo)",
   nota: "Paso por ti. Tú solo trae tu sonrisa.",
   firma: "con cariño, yo",
 
   // Lo que dice el botón "No" cada vez que intenta tocarlo
-  respuestasNo: ["¿Segura?", "Piénsalo bien", "¿Y si sí?", "Ándale 🥺", "Ya casi…", "Bueno, sí 🙈"],
+  respuestasNo: ["¿Segura?", "Piénsalo bien", "¿Y si sí?", "Ándale…", "Es tu cumpleaños…", "Bueno, sí"],
 };
 /* ============================================================ */
 
 const HEART = '<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>';
+const LEAF = '<svg viewBox="0 0 24 24"><path d="M20 4C10 4 4 10 4 20c10 0 16-6 16-16z"/><path class="vein" d="M5 19L16 8"/></svg>';
 const SPARKLE = '<svg viewBox="0 0 24 24"><path d="M12 0C13 8 16 11 24 12 16 13 13 16 12 24 11 16 8 13 0 12 8 11 11 8 12 0Z"/></svg>';
 // ramita de flores en trazo fino (se "dibuja" sola al aparecer)
 const SPRIG = `<svg viewBox="0 0 120 120" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -73,32 +73,51 @@ function fill() {
     card.appendChild(deco);
   });
 
+  // enredaderas en las cuatro esquinas de la pantalla
+  $(".vines").innerHTML = ["tl", "tr", "bl", "br"]
+    .map((c) => `<span class="sprig vine vine--${c}">${SPRIG}</span>`)
+    .join("");
+
   if (!CONFIG.vestimenta) $("#detail-vestimenta").remove();
   if (CONFIG.mapa) $("#btn-map").href = CONFIG.mapa;
-  else $("#btn-map").remove();
+  else $("#date-actions").remove();
 }
 
-/* ---------- Corazones flotando de fondo ---------- */
+/* ---------- Hojas, luciérnagas y destellos de fondo ---------- */
 
 function petals() {
   if (reduceMotion) return;
   const box = $(".petals");
-  const count = window.innerWidth < 600 ? 12 : 20;
-  for (let i = 0; i < count; i++) {
+  const small = window.innerWidth < 600;
+
+  for (let i = 0; i < (small ? 10 : 16); i++) {
     const el = document.createElement("span");
     el.className = "petal";
-    el.innerHTML = HEART;
+    el.innerHTML = LEAF;
     el.style.setProperty("--x", `${Math.random() * 100}%`);
-    el.style.setProperty("--s", `${8 + Math.random() * 14}px`);
-    el.style.setProperty("--d", `${14 + Math.random() * 14}s`);
-    el.style.setProperty("--delay", `${-Math.random() * 26}s`);
-    el.style.setProperty("--o", (0.25 + Math.random() * 0.35).toFixed(2));
-    el.style.setProperty("--r", `${(Math.random() - 0.5) * 120}deg`);
+    el.style.setProperty("--s", `${10 + Math.random() * 14}px`);
+    el.style.setProperty("--d", `${16 + Math.random() * 14}s`);
+    el.style.setProperty("--delay", `${-Math.random() * 28}s`);
+    el.style.setProperty("--o", (0.3 + Math.random() * 0.35).toFixed(2));
+    el.style.setProperty("--r", `${(Math.random() - 0.5) * 360}deg`);
     box.appendChild(el);
   }
-  // destellos que titilan
-  const sparkles = window.innerWidth < 600 ? 9 : 16;
-  for (let i = 0; i < sparkles; i++) {
+
+  for (let i = 0; i < (small ? 12 : 22); i++) {
+    const el = document.createElement("span");
+    el.className = "firefly";
+    el.style.setProperty("--x", `${Math.random() * 100}%`);
+    el.style.setProperty("--y", `${Math.random() * 100}%`);
+    el.style.setProperty("--s", `${3 + Math.random() * 4}px`);
+    el.style.setProperty("--d", `${8 + Math.random() * 10}s`);
+    el.style.setProperty("--g", `${2 + Math.random() * 3}s`);
+    el.style.setProperty("--delay", `${-Math.random() * 10}s`);
+    el.style.setProperty("--dx", `${(Math.random() - 0.5) * 80}px`);
+    el.style.setProperty("--dy", `${(Math.random() - 0.5) * 80}px`);
+    box.appendChild(el);
+  }
+
+  for (let i = 0; i < (small ? 7 : 12); i++) {
     const el = document.createElement("span");
     el.className = "sparkle";
     el.innerHTML = SPARKLE;
@@ -214,22 +233,23 @@ async function sayYes() {
   startCountdown();
 }
 
-/* ---------- Explosión de corazones ---------- */
+/* ---------- Explosión de hojas, corazones y destellos ---------- */
 
 function burst() {
   if (reduceMotion) return;
   const box = $("#burst");
-  const colors = ["#b4434f", "#e9a9ad", "#d86b76", "#f3cfcb", "#8c2f39"];
-  const n = window.innerWidth < 600 ? 26 : 38;
+  const shapes = [LEAF, LEAF, HEART, SPARKLE];
+  const colors = ["#4f6b45", "#8fae7c", "#c9a45c", "#a9bf98", "#34492f", "#e3c98a"];
+  const n = window.innerWidth < 600 ? 28 : 40;
   for (let i = 0; i < n; i++) {
     const el = document.createElement("span");
     const angle = (Math.PI * 2 * i) / n + Math.random() * 0.4;
     const dist = 90 + Math.random() * Math.min(window.innerWidth, 520) * 0.45;
-    el.innerHTML = HEART;
+    el.innerHTML = shapes[i % shapes.length];
     el.style.setProperty("--tx", `${Math.cos(angle) * dist}px`);
     el.style.setProperty("--ty", `${Math.sin(angle) * dist - 40}px`);
-    el.style.setProperty("--s", `${10 + Math.random() * 18}px`);
-    el.style.setProperty("--r", `${(Math.random() - 0.5) * 90}deg`);
+    el.style.setProperty("--s", `${10 + Math.random() * 16}px`);
+    el.style.setProperty("--r", `${(Math.random() - 0.5) * 180}deg`);
     el.style.setProperty("--c", colors[i % colors.length]);
     el.style.animationDelay = `${Math.random() * 120}ms`;
     box.appendChild(el);
@@ -255,42 +275,6 @@ function startCountdown() {
   tick();
   setInterval(tick, 1000);
 }
-
-/* ---------- Guardar en calendario (.ics) ---------- */
-
-$("#btn-calendar").addEventListener("click", () => {
-  const pad = (n) => String(n).padStart(2, "0");
-  const fmt = (d) =>
-    `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
-  const end = new Date(dateObj.getTime() + CONFIG.duracionHoras * 36e5);
-  const ics = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//Cita//ES",
-    "BEGIN:VEVENT",
-    `UID:${Date.now()}@cita`,
-    `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, "").split(".")[0]}Z`,
-    `DTSTART:${fmt(dateObj)}`,
-    `DTEND:${fmt(end)}`,
-    "SUMMARY:Nuestra cita 💕",
-    `LOCATION:${CONFIG.lugar}`,
-    `DESCRIPTION:${CONFIG.nota}`,
-    "BEGIN:VALARM",
-    "TRIGGER:-PT2H",
-    "ACTION:DISPLAY",
-    "DESCRIPTION:Nuestra cita 💕",
-    "END:VALARM",
-    "END:VEVENT",
-    "END:VCALENDAR",
-  ].join("\r\n");
-
-  const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
-  const a = Object.assign(document.createElement("a"), { href: url, download: "nuestra-cita.ics" });
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-});
 
 /* ---------- Inicio ---------- */
 
