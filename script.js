@@ -15,7 +15,7 @@ const CONFIG = {
   mapa: "",                           // link de Google Maps (déjalo vacío para ocultar el botón)
   vestimenta: "Tu sonrisa (y algo cómodo)",
   nota: "Paso por ti. Tú solo trae tu sonrisa.",
-  firma: "con cariño, yo",
+  firma: "con cariño, Raúl",
 
   // Lo que dice el botón "No" cada vez que intenta tocarlo
   respuestasNo: ["¿Segura?", "Piénsalo bien", "¿Y si sí?", "Ándale…", "Es tu cumpleaños…", "Bueno, sí"],
